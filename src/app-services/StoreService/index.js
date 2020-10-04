@@ -1,10 +1,8 @@
 import BaseService from "../BaseService";
-import store from "./store"
 
 class StoreService extends BaseService {
     constructor(options) {
         super(options);
-        this.appStore = options.appStore || store;
     }
 
     getName() {
@@ -23,9 +21,14 @@ class StoreService extends BaseService {
     }
 
     init() {
-        const Store = this.$services.vue.Store;
-        Store.registerModule("app",this.appStore);
-        this.store = Store.state;
+        const {Vue,Store} = this.$services.vue;
+
+        this.state = Store.state;
+        Vue.$appState = Vue.prototype.$appState = this.appState;
+    }
+
+    get appState(){
+        return this.state;
     }
 }
 

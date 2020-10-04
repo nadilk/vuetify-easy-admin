@@ -5,19 +5,17 @@ import router from "./router";
 class EasyPlugin {
     constructor(Vue) {
         this.services = Vue.observable({
-            vue:{
-
-            }
+            vue: {}
         });
 
         this.initVue(Vue);
     }
 
-    initVue(Vue){
+    initVue(Vue) {
         this.services.vue = {
             Vue,
-            Store: store,
-            Router: router,
+            Store  : store,
+            Router : router,
             Vuetify: vuetify
         };
     }
@@ -26,11 +24,11 @@ class EasyPlugin {
         this.initServices(options.services);
     }
 
-    getVueOptions(){
+    getVueOptions() {
         return {
-            store: this.services.vue.Store,
+            store  : this.services.vue.Store,
             vuetify: this.services.vue.Vuetify,
-            router: this.services.vue.Router
+            router : this.services.vue.Router
         }
     }
 
@@ -47,8 +45,10 @@ class EasyPlugin {
             Vue.set(this.services, serviceObj.getName(), serviceObj);
         }
 
-        for(let service in Services) {
-            Services[service].onServicePluginInitComplete();
+        for (let service in Services) {
+            if (Services[service].onServicePluginInitComplete) {
+                Services[service].onServicePluginInitComplete();
+            }
         }
     }
 

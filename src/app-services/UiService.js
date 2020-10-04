@@ -1,4 +1,4 @@
-import BaseService from "./BaseModule";
+import BaseService from "./BaseService";
 
 class UiService extends BaseService {
     constructor(options) {
@@ -10,24 +10,28 @@ class UiService extends BaseService {
     }
 
     get navigationMenu() {
-        return this.$app.store.state.ui.navigationMenu;
+        if(!this.$services.store.state.main)
+            return {};
+        return this.$services.store.state.main.ui.navigationMenu;
     }
 
     get appBar() {
-        return this.$app.store.state.ui.appBar;
+        if(!this.$services.store.state.main)
+            return {};
+        return this.$services.store.state.main.ui.appBar;
     }
 
 
     toggleNavigationMenu(isVisible) {
         if (isVisible === undefined)
-            isVisible = !this.$app.store.state.ui.navigationMenu.isVisible;
-        this.$store.dispatch('toggleUiModule', {module: "navigationMenu", isVisible})
+            isVisible = !this.$services.store.state.main.ui.navigationMenu.isVisible;
+        this.$services.vue.Store.dispatch('main/toggleUiModule', {module: "navigationMenu", isVisible})
     }
 
     toggleAppBar(isVisible) {
         if (isVisible === undefined)
-            isVisible = !this.$app.store.state.ui.appBar.isVisible;
-        this.$store.dispatch('toggleUiModule', {module: "appBar", isVisible})
+            isVisible = !this.$services.store.state.main.ui.appBar.isVisible;
+        this.$services.vue.Store.dispatch('main/toggleUiModule', {module: "appBar", isVisible})
     }
 
     installModuleMenuItems(module) {
@@ -35,9 +39,9 @@ class UiService extends BaseService {
         const routePrefix = this.$services.nav.options.router.prefix;
         module.getMenuItems().forEach(m => {
             m.id = m.id === 0 ? 0 : (module.getName() + '_' + m.id);
-            m.url = `/${routePrefix}/${module.getName()}${m.url}`;
+            m.url = `/${routePrefix}/${m.url}`;
             m.parentId = m.parentId === 0 ? 0 : (module.getName() + '_' + m.parentId);
-            self.$services.vue.Store.dispatch('pushMenuItem', m);
+            self.$services.vue.Store.dispatch('main/pushMenuItem', m);
         });
     }
 }

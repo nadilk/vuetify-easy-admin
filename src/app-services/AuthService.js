@@ -18,7 +18,7 @@ class AuthService extends BaseService{
 
     login(credentials){
         if(credentials.email === 'admin'){
-            this.$services.vue.Store.dispatch('setServiceToken','my-service-token');
+            this.$services.vue.Store.dispatch('main/setServiceToken','my-service-token');
             this.$services.nav.navigate({ name: "main.home" });
             this.$services.ui.toggleAppBar(true);
             return true;
@@ -28,13 +28,15 @@ class AuthService extends BaseService{
     }
 
     logout(){
-        this.$services.vue.Store.dispatch('auth/setServiceToken','');
+        this.$services.vue.Store.dispatch('main/setServiceToken','');
         this.$services.nav.navigate({ name: "main.auth" });
         this.$services.ui.toggleAppBar(false);
     }
 
     get isAuthorized(){
-        return !!this.$services.store.state.auth.token;
+        if(!this.$services.store.state.main)
+            return false;
+        return !!this.$services.store.state.main.auth.token;
     }
 }
 

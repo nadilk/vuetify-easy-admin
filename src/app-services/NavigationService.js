@@ -20,30 +20,30 @@ class NavigationService extends BaseService {
     }
 
     installModuleRoutes(module) {
-        this.$services.vue.Router.addRoutes(this.makeModuleRoutes(module));
+        this.$services.vue.Router.addRoutes([this.makeModuleRoutes(module)]);
     }
 
     makeModuleRoutes(module) {
-        const {routePrefix} = this.options.router.prefix;
+        const routePrefix = this.options.router.prefix;
 
-        const makeRoute = function (route, namePrefix) {
+        const makeRoute = function (route) {
             if (route.name) {
-                route.name = namePrefix = namePrefix + "." + route.name;
+                route.name = module.getName() + "." + route.name;
             }
             if (route.children) {
                 route.children.forEach(function (childRoute) {
-                    makeRoute(childRoute, namePrefix);
+                    makeRoute(childRoute,);
                 })
             }
             return route;
         };
-        const moduleRoutes = module.routes.map(makeRoute);
+        const moduleRoutes = module.getRoutes().map(makeRoute);
 
-        return [{
-            path     : `/${routePrefix}/${module.getName()}`,
+        return {
+            path     : `/${routePrefix}/${module.getName()}/`,
             children : moduleRoutes,
             component: PassThrough
-        }];
+        };
     }
 }
 

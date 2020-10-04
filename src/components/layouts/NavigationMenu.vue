@@ -1,8 +1,8 @@
 <template>
     <v-navigation-drawer
         app fixed temporary
-        v-model="$app.ui.navigationMenu.isVisible"
-        v-if="$app.auth.isAuthorized"
+        v-model="$services.ui.navigationMenu.isVisible"
+        v-if="$services.auth.isAuthorized"
     >
         <v-list>
             <nested-menu-list-item v-for="item in items" :item="item"  :key="'menu_item_'+item.id"/>
@@ -18,7 +18,7 @@
         components: {NestedMenuListItem},
         computed  : {
             items(){
-                return this.$store.getters.getMenuItems(0);
+                return this.$store.getters['main/getMenuItems'](0);
             }
         }
     }

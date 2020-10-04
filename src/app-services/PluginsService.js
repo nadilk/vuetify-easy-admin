@@ -1,4 +1,4 @@
-import BaseService from "./BaseModule";
+import BaseService from "./BaseService";
 
 class PluginsService extends BaseService {
     constructor(options) {
@@ -10,7 +10,7 @@ class PluginsService extends BaseService {
     }
 
     init() {
-        const Vue = this.$vue;
+        const Vue = this.$services.vue.Vue;
         for (let name in this.options.plugins) {
             Vue.set(this, name, this.options.plugins[name]);
         }

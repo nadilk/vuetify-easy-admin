@@ -5,7 +5,7 @@ class BaseService {
     }
 
     init(){
-        throw Error("Cannot init base class! Make a child class.")
+
     }
 
     onServicePluginInitComplete(){

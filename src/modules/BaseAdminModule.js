@@ -1,5 +1,3 @@
-import PassThrough from "./PassThrough";
-
 class BaseAdminModule {
     constructor(options) {
         this.module = {options};

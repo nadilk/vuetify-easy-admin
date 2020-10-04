@@ -1,6 +1,6 @@
 {
-  "name": "vuetify-easy-admin",
-  "version": "1.0.0",
+  "name": "@nadilk/vuetify-easy-admin",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {

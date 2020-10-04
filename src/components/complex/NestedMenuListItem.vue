@@ -31,7 +31,7 @@
         },
         computed: {
             children() {
-                return this.$store.getters.getMenuItems(this.item.id);
+                return this.$store.getters['main/getMenuItems'](this.item.id);
             },
             hasChildren() {
                 return this.children.length > 0;

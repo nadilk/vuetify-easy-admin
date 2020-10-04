@@ -1,5 +1,4 @@
-import BaseService from "./BaseModule";
-import PassThrough from "../components/PassThrough";
+import BaseService from "./BaseService";
 
 class AdminModuleService extends BaseService {
     constructor(options) {
@@ -16,10 +15,10 @@ class AdminModuleService extends BaseService {
     }
 
     installAdminModules() {
-        this.modules.forEach(this.installAdminModule);
+        this.modules.forEach((module) => this.installAdminModule(module));
     }
 
-    installAdminModule(module){
+    installAdminModule(module) {
         this.$services.store.installModuleStore(module);
         this.$services.nav.installModuleRoutes(module);
         this.$services.ui.installModuleMenuItems(module);

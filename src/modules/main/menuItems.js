@@ -6,5 +6,13 @@ export default [
         url     : "main/home",
         isExpanded: false,
         parentId  : 0
+    },
+    {
+        id        : 2,
+        text      : "Авторизация",
+        icon      : "",
+        url     : "main/auth",
+        isExpanded: false,
+        parentId  : 0
     }
 ]
