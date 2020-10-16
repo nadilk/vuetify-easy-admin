@@ -16,7 +16,7 @@ class StoreService extends BaseService {
     installModuleStore(module){
         const moduleStore = module.getStore();
         if(moduleStore){
-            this.$services.vue.Store.registerModule(module.getName(),module.getStore());
+            this.$services.vue.Store.registerModule(module.name,moduleStore);
         }
     }
 

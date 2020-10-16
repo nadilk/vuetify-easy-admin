@@ -1,7 +1,28 @@
+
+
 class BaseAdminModule {
+
+
     constructor(options) {
-        this.module = {options};
+        this.options = options;
     }
+
+    setServices(services){
+        this.$services = services;
+    }
+
+    postInstall(){
+
+    }
+
+    get name(){
+        return this.getName();
+    }
+
+    get func(){
+        return this.$services.vue.Vue.$modules[this.name];
+    }
+
 
     getName() {
 
@@ -17,6 +38,14 @@ class BaseAdminModule {
 
     getStore(){
 
+    }
+
+    getFacade(){
+        return {}
+    }
+
+    getModuleFacades(){
+        return this.$services.vue.Vue.$modules;
     }
 }
 

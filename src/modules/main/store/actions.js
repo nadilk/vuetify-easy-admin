@@ -1,5 +1,3 @@
-import axios from "axios"
-
 const calcURL = process.env.MIX_API_URL + "calc-service/api";
 const netURL = "https://online.nsk.kz/net-service/api/request"
 
